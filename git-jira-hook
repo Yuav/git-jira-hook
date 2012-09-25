@@ -403,7 +403,7 @@ def jira_explicit_login(soap_client):
                 logging.info("... interrupted")
 
             except Exception,e:
-                logging.error("User '%s' does not have access to Jira issues")
+                logging.error("User '%s' does not have access to Jira issues", username)
                 return None
 
         except KeyboardInterrupt:
