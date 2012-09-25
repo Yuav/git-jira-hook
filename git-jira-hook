@@ -36,6 +36,7 @@ import sys
 import os
 
 myname = os.path.basename(sys.argv[0])
+REPO_NAME = os.getcwd().split('/')[4]
 
 # Change this value to "CRITICAL/ERROR/WARNING/INFO/DEBUG/NOTSET" 
 # as appropriate. 
@@ -261,7 +262,7 @@ def jira_add_comment(jira_soap_client, jira_auth, commit_id, commit_text):
     gitweb_url = get_gitweb_url()
     if gitweb_url != None or gitweb_url != "":
         commit_text_with_url = commit_text.replace(commit_id, \
-            "[" + commit_id + "|" + gitweb_url + commit_id + "]")
+            "[" + commit_id + "|" + gitweb_url + "/" + REPO_NAME + "/commitdiff/" + commit_id + "]")
     else:
         commit_text_with_url = commit_text
 
