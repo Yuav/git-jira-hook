@@ -31,6 +31,8 @@ Table of Contents
     5. Known limitations
     6. Frequently Asked Questions (FAQ)
     7. Credits
+    8. References
+    9. Notes
 
 
 1. Introduction
@@ -294,3 +296,9 @@ This script was inspired by the following:
 
 [3] Gitweb, a web based browser for git
     http://git.or.cz/gitwiki/Gitweb
+    
+
+8. Notes 
+=============
+JIRA is not developing the SOAP API any more. See: https://developer.atlassian.com/display/JIRADEV/Creating+a+JIRA+SOAP+Client
+SOAP will be deprecated if the REST-API is full developed
