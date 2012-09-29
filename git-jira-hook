@@ -277,7 +277,7 @@ def jira_add_comment(jira_soap_client, jira_auth, commit_id, commit_text):
 def call_pattern_hook(text, pattern, hookfn, jira_soap_client, jira_auth, jira_text):
     if not callable(hookfn):
         logging.error("Hook function is not callable");
-        exit -1
+        sys.exit(-1)
 
     magic = re.compile(pattern + ' #\w\w*-\d\d*')
  
@@ -575,7 +575,7 @@ def git_get_branchname_from_ref(ref):
     # "refs/heads/<branchname>"
     if string.find(ref, "refs/heads") != 0:
         logging.error("Invalid ref '%s'", ref)
-        exit -1
+        sys.exit(-1)
 
     return string.strip(ref[len("refs/heads/"):])
 
@@ -608,4 +608,4 @@ def git_get_array_of_commit_ids(start_id, end_id):
 #----------------------------------------------------------------------------
 # python script entry point. Dispatches main()
 if __name__ == "__main__":
-  exit (main())
+  sys.exit (main())
