@@ -34,6 +34,8 @@ import sys
 import os
 
 myname = os.path.basename(sys.argv[0])
+## adapt the number
+## cd into .git-folder -> call python -> import os -> call this function and adapt number
 REPO_NAME = os.getcwd().split('/')[4]
 
 # Change this value to "CRITICAL/ERROR/WARNING/INFO/DEBUG/NOTSET"
