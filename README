@@ -300,5 +300,7 @@ This script was inspired by the following:
 
 8. Notes 
 =============
-JIRA is not developing the SOAP API any more. See: https://developer.atlassian.com/display/JIRADEV/Creating+a+JIRA+SOAP+Client
-SOAP will be deprecated if the REST-API is full developed
+- JIRA is not developing the SOAP API any more. See: https://developer.atlassian.com/display/JIRADEV/Creating+a+JIRA+SOAP+Client
+  SOAP will be deprecated if the REST-API is full developed
+- JIRA SOAP at bitbucket: https://bitbucket.org/bob_swift/jira-soap
+
