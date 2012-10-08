@@ -588,12 +588,6 @@ def git_get_branchname_from_ref(ref):
 def git_config_get(name):
     return get_shell_cmd_output("git config '" + name + "'")
 
-def git_config_set(name, value):
-    os.system("git config " + name + " '" + value + "'")
-
-def git_config_unset(name):
-    os.system("git config --unset-all " + name)
-
 def git_get_commit_msg(commit_id):
     return get_shell_cmd_output("git rev-list --pretty --max-count=1 " + commit_id)
 
