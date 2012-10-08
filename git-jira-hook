@@ -37,6 +37,7 @@ myname = os.path.basename(sys.argv[0])
 ## adapt the number
 ## cd into .git-folder -> call python -> import os -> call this function and adapt number
 REPO_NAME = os.getcwd().split('/')[4]
+GIT_PATH = '/usr/bin/git'
 
 # Change this value to "CRITICAL/ERROR/WARNING/INFO/DEBUG/NOTSET"
 # as appropriate.
@@ -78,7 +79,9 @@ def main():
     else:
         logging.error("invoked as '%s'. Need to be invoked as commit-msg, post-commit, update or post-receive" , myname)
         return -1
- 
+
+def call_git(command, args, input=None):
+    return Popen([GIT_PATH, command] + args, stdin=PIPE, stdout=PIPE).communicate(input)[0]
 
 # This function performs the git "commit-msg" hook
 # In this function, the commit message text is parsed for the magic
@@ -561,7 +564,7 @@ def enabled_on_branch(current_branchname):
 
 # Get our current branchname
 def git_get_curr_branchname():
-    buf = get_shell_cmd_output("git branch --no-color")
+    buf = call_git('branch',['--no-color']).splitlines() #get_shell_cmd_output("git branch --no-color")
     # buf is a multiline output, each line containing a branch name
     # the line that starts with a "*" contains the current branch name
 
@@ -586,16 +589,16 @@ def git_get_branchname_from_ref(ref):
 
 
 def git_config_get(name):
-    return get_shell_cmd_output("git config '" + name + "'")
+    return call_git('config', [name]) #get_shell_cmd_output("git config '" + name + "'")
 
 def git_get_commit_msg(commit_id):
-    return get_shell_cmd_output("git rev-list --pretty --max-count=1 " + commit_id)
+    return call_git('rev-list', ['--pretty','--max-conut=1', commit_id])
 
 def git_get_last_commit_id():
-    return get_shell_cmd_output("git log --pretty=format:%H -1")
+    return call_git('log', ['--pretty=format:%H','-1']).splitlines() #get_shell_cmd_output("git log --pretty=format:%H -1")
 
 def git_get_array_of_commit_ids(start_id, end_id):
-    output = get_shell_cmd_output("git rev-list " + start_id + ".." + end_id)
+    output = call_git('rev-list', [start_id,end_id]).splitlines() #get_shell_cmd_output("git rev-list " + start_id + ".." + end_id)
     if output == "":
         return None
  
