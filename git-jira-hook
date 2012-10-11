@@ -268,7 +268,6 @@ def jira_start_session(jira_url):
         logging.info("... interrupted")
 
     except Exception, e:
-        save_jira_cached_auth(jira_url, "")
         logging.error("Invalid Jira URL: '%s'", jira_url)
         logging.debug(e)
         return -1
@@ -285,37 +284,9 @@ def jira_start_session(jira_url):
 # for username/password
 def jira_login(jira_url, soap_client):
 
-    auth = get_jira_cached_auth(jira_url)
-    if auth != None and auth != "":
-        auth = jira_implicit_login(soap_client, auth)
-    else:
-        auth = None
-
-    if auth == None:
-        save_jira_cached_auth(jira_url, "")
-        auth = jira_explicit_login(soap_client)
-
-
-    if auth != None:
-        save_jira_cached_auth(jira_url, auth)
-
+    auth = jira_explicit_login(soap_client)
     return auth
 
-def jira_implicit_login(soap_client, auth):
-
-    # test jira to see if auth is valid
-    try:
-        jira_types = soap_client.getIssueTypes(auth)
-        return auth
-    except KeyboardInterrupt:
-        logging.info("... interrupted")
-
-    except Exception, e:
-        print >> sys.stderr, "Previous Jira login is invalid or has expired"
-        # logging.debug(e)
- 
-
-    return None
 
 def jira_explicit_login(soap_client):
     max_retry_count = 3
@@ -408,61 +379,11 @@ def get_jira_url():
 
     return jira_url
 
-def get_jira_cached_auth(jira_url):
-    return get_cfg_value(os.environ['HOME'] + "/.jirarc", jira_url, "auth")
-
-def save_jira_cached_auth(jira_url, auth):
-    return save_cfg_value(os.environ['HOME'] + "/.jirarc", jira_url, "auth", auth)
-
-
 #---------------------------------------------------------------------
 # Misc. helper functions
 #
 def get_gitweb_url():
     return git_config_get("gitweb.url")
-
-def get_cfg_value(cfg_file_name, section, key):
-    try:
-        cfg = ConfigParser.ConfigParser()
-        cfg.read(cfg_file_name)
-        value = cfg.get(section, key)
-    except:
-        return None
-    return value
- 
-
-def save_cfg_value(cfg_file_name, section, key, value):
-    try:
-        cfg = ConfigParser.SafeConfigParser()
-    except Exception, e:
-        logging.warning("Failed to instantiate a ConfigParser object")
-        logging.debug(e)
-        return
-
-    try:
-        cfg.read(cfg_file_name)
-    except Exception, e:
-        logging.warning("Failed to read .jirarc")
-        logging.debug(e)
-        return
-
-    try:
-        cfg.add_section(section)
-    except ConfigParser.DuplicateSectionError,e:
-        logging.debug("Section '%s' already exists in '%s'", section, cfg_file_name)
-
-    try:
-        cfg.set(section, key, value)
-    except Exception,e:
-        logging.warning("Failed to add '%s' to '%s'", key, cfg_file_name)
-        logging.debug(e)
-
-    try:
-        cfg.write(open(cfg_file_name, 'wb'))
-    except Exception, e:
-        logging.warning("Failed to write '%s'='%s' to file %s", key, value, cfg_file_name)
-        logging.debug(e)
-        return
 
 #----------------------------------------------------------------------------
 # git helper functions
