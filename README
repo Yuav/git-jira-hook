@@ -130,7 +130,10 @@ repository to the "upstream" one. Also, the "upstream" repository
 is typically a bare repository, and no actual commits are done
 here.
 
-The hook is completely installed in the "upstream" repository.
+The hook is completely installed in the "upstream" repository. In my case I have
+a special "commit"-User. With this User it is easier to filter "commit"-emails
+from jira. Therefore you must insert a username and a password of the
+"commit"-User in the hook (line 296, 297).
 
 Whenever a commit is made in the upstream repository or a "git push" 
 is done to it, the  installed hook will kick in and validate the 

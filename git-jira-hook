@@ -264,9 +264,6 @@ def jira_start_session(jira_url):
         soap_client = SOAPpy.WSDL.Proxy(handle)
         # print "self.soap_client set", self.soap_client
 
-    except KeyboardInterrupt:
-        logging.info("... interrupted")
-
     except Exception, e:
         logging.error("Invalid Jira URL: '%s'", jira_url)
         logging.debug(e)
@@ -296,17 +293,8 @@ def jira_explicit_login(soap_client):
         if retry_count > 0:
             logging.info("Invalid Jira password/username combination, try again")
 
-        # We now need to read the Jira username/password from
-        # the console.
-        # However, there is a problem. When git hooks are invoked
-        # stdin is pointed to /dev/null, see here:
-        # http://kerneltrap.org/index.php?q=mailarchive/git/2008/3/4/1062624/thread
-        # The work-around is to re-assign stdin back to /dev/tty , as per
-        # http://mail.python.org/pipermail/patches/2002-February/007193.html
-        sys.stdin = open('/dev/tty', 'r')
-
-        username = raw_input('Jira username: ')
-        password = getpass.getpass('Jira password: ')
+        username = #insert a "commit"-User here 
+        password = #insert password of "commit"-User here
 
         # print "abc"
         # print "self.soap_client login...%s " % username + password
@@ -317,15 +305,9 @@ def jira_explicit_login(soap_client):
                 jira_types = soap_client.getIssueTypes(auth)
                 return auth
 
-            except KeyboardInterrupt:
-                logging.info("... interrupted")
-
             except Exception,e:
                 logging.error("User '%s' does not have access to Jira issues", username)
                 return None
-
-        except KeyboardInterrupt:
-            logging.info("... interrupted")
 
         except Exception,e:
             logging.debug("Login failed")
@@ -347,9 +329,6 @@ def jira_find_issue(issuekey, jira_soap_client, jira_auth, jira_text):
         logging.debug("Found issue '%s' in Jira: (%s)",
                     issuekey, issue["summary"])
         return 0
-
-    except KeyboardInterrupt:
-        logging.info("... interrupted")
 
     except Exception, e:
         logging.error("No such issue '%s' in Jira", issuekey)
