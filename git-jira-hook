@@ -218,7 +218,7 @@ def handle_post_receive():
     return 0
  
 def validate_commit_text(jira_soap_client, jira_auth, commit_text, commit_id=None):
-    refed_issue_count = call_pattern_hook(commit_text, "refs", \
+    refed_issue_count = call_pattern_hook(commit_text, \
             jira_find_issue, jira_soap_client, jira_auth, None)
 
     if refed_issue_count == 0:
@@ -239,7 +239,7 @@ def jira_add_comment(jira_soap_client, jira_auth, commit_id, commit_text):
         commit_text_with_url = commit_text
 
 
-    call_pattern_hook(commit_text, 'refs', jira_add_comment_to_issue, \
+    call_pattern_hook(commit_text, jira_add_comment_to_issue, \
                                 jira_soap_client, jira_auth, commit_text_with_url)
     return
 
@@ -249,12 +249,12 @@ def jira_add_comment(jira_soap_client, jira_auth, commit_id, commit_text):
 # text for Jira magic words, and calls the function repeatedly
 # returns number of issues found and touched
 # in case of error, return -1
-def call_pattern_hook(text, pattern, hookfn, jira_soap_client, jira_auth, jira_text):
+def call_pattern_hook(text, hookfn, jira_soap_client, jira_auth, jira_text):
     if not callable(hookfn):
         logging.error("Hook function is not callable");
         sys.exit(-1)
 
-    magic = re.compile(pattern + ' #\w\w*-\d\d*')
+    magic = re.compile(' #\w\w*-\d\d*')
  
     iterator = magic.finditer(text)
     issue_count = 0
