@@ -17,6 +17,7 @@
 
 # File: git-jira-hook
 # Author: Joyjit Nath
+# Version: 1.8 (by Max Oberberger - github@oberbergers.de)
 #
 ###########################################################################
 
@@ -213,7 +214,7 @@ def handle_post_receive():
 
     for commit_id in commit_id_array:
         commit_text = git_get_commit_msg(commit_id)
-        jira_add_comment(jira_soap_client, jira_auth, commit_id, commit_text)
+        jira_add_comment(jira_soap_client, jira_auth, commit_id, commit_text, ref)
 
     return 0
  
@@ -230,11 +231,11 @@ def validate_commit_text(jira_soap_client, jira_auth, commit_text, commit_id=Non
     return 0
 
 
-def jira_add_comment(jira_soap_client, jira_auth, commit_id, commit_text):
+def jira_add_comment(jira_soap_client, jira_auth, commit_id, commit_text, ref):
     gitweb_url = get_gitweb_url()
     if gitweb_url != None or gitweb_url != "":
         commit_text_with_url = commit_text.replace(commit_id, \
-            "[" gitweb_url + "/" + REPO_NAME + "/commitdiff/" + commit_id + "]")
+            "[" gitweb_url + "/" + REPO_NAME + "/commitdiff/" + commit_id + "] on branch " + git_get_branchname_from_ref(ref))
     else:
         commit_text_with_url = commit_text
 
