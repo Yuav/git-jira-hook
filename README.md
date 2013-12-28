@@ -18,13 +18,13 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Table of Contents
 =================
-1. Introduction
-2. System Requirements
-3. Installation
-4. Using git-jira-hook
-5. Credits
-6. References
-7. Notes
+1. [Introduction]()
+2. [System Requirements]()
+3. [Installation]()
+4. [Using git-jira-hook]()
+5. [Credits]()
+6. [References]()
+7. [Notes]()
 
 
 1. Introduction
