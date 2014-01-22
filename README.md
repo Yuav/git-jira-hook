@@ -1,4 +1,4 @@
-Copyright (c) 2012 Max Oberberger (max@oberbergers.de)
+Copyright (c) 2012-2014 Max Oberberger (max@oberbergers.de)
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -97,21 +97,15 @@ commit simply by clicking on the hyperlink.
 
 2. System Requirements
 ======================
-    - Python 2.x and python modules: jira-python (available at Bitbucket:
-      https://bitbucket.org/bspeakmon/jira-python)
-      I have tested with Python 2.7.4.
-
-    - A Jira installation with Remote APIs enabled.
-
-    - git version 1.6.x.y (I have tested with 1.8.1.2).
-
-    - Linux or some other similar Unix flavor (I have tested with 
-      Ubuntu 12.03 LTS).
-
-    - OPTIONAL, but Highly recommended: gitweb [4] which has been 
-      setup with "upstream" git repositories.
-
-
+- Python 2.x and python modules: jira-python (available at Bitbucket:
+  https://bitbucket.org/bspeakmon/jira-python)
+  I have tested with Python 2.7.4.
+- A Jira installation with Remote APIs enabled.
+- git version 1.6.x.y (I have tested with 1.8.1.2).
+- Linux or some other similar Unix flavor (I have tested with 
+  Ubuntu 12.03 LTS).
+- OPTIONAL, but Highly recommended: gitweb [4] which has been 
+  setup with "upstream" git repositories.
 
 3. Installation
 ===============
@@ -138,9 +132,9 @@ commit message, followed by update of the Jira issue.
 
 3.1 Installation for "upstream" repository
 ------------------------------------------
-(i)   Copy this script to 
-      <upstream-repo-GIT-dir>/hooks/{pre-receive|update|post-receive} 
-      and mark it executable
+- Copy this script to 
+  upstream-repo-GIT-dir/hooks/{pre-receive|update|post-receive} 
+  and mark it executable
 
       Example:
        chmod +x git-jira-hook
@@ -172,9 +166,10 @@ upstream, the final validation and Jira issue update will be done.
 5. Credits
 ==========
 This script was inspired by the following:
-   http://github.com/dreiss/git-jira-attacher/tree/master
-   https://github.com/chiemseesurfer/git-trac-hook
-   http://jira-python.readthedocs.org/en/latest/
+
+- http://github.com/dreiss/git-jira-attacher/tree/master
+- https://github.com/chiemseesurfer/git-trac-hook
+- http://jira-python.readthedocs.org/en/latest/
 
 
 6. References
