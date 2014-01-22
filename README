@@ -1,9 +1,4 @@
-<<<<<<< HEAD:README.md
-Copyright (c) 2012-2014 Max Oberberger (max@oberbergers.de)
-=======
-=======================================================================
 Copyright 2009 Broadcom Corporation
->>>>>>> parent of 0d070d0... add new jira hook for REST-API and adapt README to match new hook:README
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
@@ -11,20 +6,12 @@ You may obtain a copy of the License at
 
    http://www.apache.org/licenses/LICENSE-2.0
 
-<<<<<<< HEAD:README.md
-You should have received a copy of the GNU General Public License 
-along with this program.  If not, see <http://www.gnu.org/licenses/>.
-
-* * *
-
-=======
 Unless required by applicable law or agreed to in writing, software
 distributed under the License is distributed on an "AS IS" BASIS,
 WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 ========================================================================
->>>>>>> parent of 0d070d0... add new jira hook for REST-API and adapt README to match new hook:README
 
 
                     git-jira-hook README
@@ -36,25 +23,15 @@ limitations under the License.
 
 Table of Contents
 =================
-<<<<<<< HEAD:README.md
 1. [Introduction]()
 2. [System Requirements]()
 3. [Installation]()
 4. [Using git-jira-hook]()
-5. [Credits]()
-6. [References]()
-7. [Notes]()
-=======
-    1. Introduction
-    2. System Requirements
-    3. Installation
-    4. Using git-jira-hook
-    5. Known limitations
-    6. Frequently Asked Questions (FAQ)
-    7. Credits
-    8. References
-    9. Notes
->>>>>>> parent of 0d070d0... add new jira hook for REST-API and adapt README to match new hook:README
+5. [Known limitations]()
+6. [Frequently Asked Questions (FAQ)]()
+7. [Credits]()
+8. [References]()
+9. [Notes]()
 
 
 1. Introduction
@@ -124,32 +101,19 @@ commit simply by clicking on the hyperlink.
 
 2. System Requirements
 ======================
-<<<<<<< HEAD:README.md
-- Python 2.x and python modules: jira-python (available at Bitbucket:
-  https://bitbucket.org/bspeakmon/jira-python)
-  I have tested with Python 2.7.4.
+
+- Python 2.x and python modules: SOAPpy, ConfigParser.
+  I have tested with Python 2.5.2.
+
 - A Jira installation with Remote APIs enabled.
-- git version 1.6.x.y (I have tested with 1.8.1.2).
+
+- git version 1.6.x.y (I have tested with 1.6.0.4).
+
 - Linux or some other similar Unix flavor (I have tested with 
-  Ubuntu 12.03 LTS).
+  SuSE 11.3).
+
 - OPTIONAL, but Highly recommended: gitweb [4] which has been 
   setup with "upstream" git repositories.
-=======
-    - Python 2.x and python modules: SOAPpy, ConfigParser.
-      I have tested with Python 2.5.2.
-
-    - A Jira installation with Remote APIs enabled.
-
-    - git version 1.6.x.y (I have tested with 1.6.0.4).
-
-    - Linux or some other similar Unix flavor (I have tested with 
-      SuSE 11.3).
-
-    - OPTIONAL, but Highly recommended: gitweb [4] which has been 
-      setup with "upstream" git repositories.
-
-
->>>>>>> parent of 0d070d0... add new jira hook for REST-API and adapt README to match new hook:README
 
 3. Installation
 ===============
@@ -257,14 +221,8 @@ http://git.mycompany.com/gitweb.cgi?p=joyjit-repo/.git;a=commit;h=424daa955f5c8a
 7. Credits
 ==========
 This script was inspired by the following:
-<<<<<<< HEAD:README.md
 
-- http://github.com/dreiss/git-jira-attacher/tree/master
-- https://github.com/chiemseesurfer/git-trac-hook
-- http://jira-python.readthedocs.org/en/latest/
-=======
-   http://github.com/dreiss/git-jira-attacher/tree/master
->>>>>>> parent of 0d070d0... add new jira hook for REST-API and adapt README to match new hook:README
+http://github.com/dreiss/git-jira-attacher/tree/master
 
 
 8. References
