@@ -1,25 +1,19 @@
-Copyright 2009 Broadcom Corporation
+Copyright (c) 2012-2014 Max Oberberger (max@oberbergers.de)
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+This program is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
 
-   http://www.apache.org/licenses/LICENSE-2.0
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the 
+GNU General Public License for more details.
 
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-========================================================================
+You should have received a copy of the GNU General Public License 
+along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-
-                    git-jira-hook README
-                    ********************
-
-                    Author: Joyjit Nath
-                    *******************
-
+* * *
 
 Table of Contents
 =================
@@ -27,15 +21,16 @@ Table of Contents
 2. [System Requirements]()
 3. [Installation]()
 4. [Using git-jira-hook]()
-5. [Known limitations]()
-6. [Frequently Asked Questions (FAQ)]()
-7. [Credits]()
-8. [References]()
-9. [Notes]()
+5. [Credits]()
+6. [References]()
+7. [Notes]()
 
 
 1. Introduction
 ===============
+The JIRA SOAP API ist not developed any more. It will be deprecated beginning
+with JIRA 5.x. Therefore I switched my git-hook from SOAP to REST. If someone
+wants to see the SOAP-hook, just checkout the soap git tag (git checkout soap).
 
 1.1 Get git and Jira to work in Harmony
 ---------------------------------------
@@ -60,7 +55,7 @@ This is particularly useful for corporate git repositories.
 In order to specify which issue (or issues) you want the commit message 
 to get tracked to in Jira, you place magic text markers such as:
 
- "#NNN"
+ "NNN"
 
 anywhere in your commit message, where "NNN" is the name of an open 
 Jira issue.
@@ -68,11 +63,11 @@ Jira issue.
 For example, say you have typed in the following commit message in
 your git repository.
 
-    Hey look! This is my very first git-commit
+    Hey look! This is my first git-commit
 
     Using the new and fresh git-jira-hook
 
-    #SW-189, #HW-278 
+    SW-189, HW-278 
 
 
 The following things will happen:
@@ -82,14 +77,14 @@ in Jira, for issue numbers "SW-189", "HW-278", and "FW-702", the
 following comments will be added:
 
     commit 424daa955f5c8a17aab9d524071f65f1999769a9
-    Author: Joyjit Nath <joyjit@mycompany.com>
-    Date: Tue Aug 25 15:12:39 2009 -0700
+    Author: Max Oberberger <max@oberbergers.de>
+    Date: Tue Aug 21 17:12:39 2012 +0200
 
-    Hey look! This is my very first git-commit
+    Hey look! This is my first git-commit
 
     Using the new and fresh git-jira-hook
 
-    #SW-189, #HW-278
+    SW-189, HW-278
 
 1.3 Wait! there's  more
 -----------------------
@@ -101,17 +96,18 @@ commit simply by clicking on the hyperlink.
 
 2. System Requirements
 ======================
-
 - Python 2.x and python modules: SOAPpy, ConfigParser.
   I have tested with Python 2.5.2.
-
 - A Jira installation with Remote APIs enabled.
-
 - git version 1.6.x.y (I have tested with 1.6.0.4).
-
 - Linux or some other similar Unix flavor (I have tested with 
   SuSE 11.3).
-
+- Python 2.x and python modules: jira-python (available at Bitbucket:
+  https://bitbucket.org/bspeakmon/jira-python)
+  I have tested with Python 2.7.4.
+- A Jira installation with Remote APIs enabled.
+- Linux or some other similar Unix flavor (I have tested with 
+  Ubuntu 12.03 LTS).
 - OPTIONAL, but Highly recommended: gitweb [4] which has been 
   setup with "upstream" git repositories.
 
@@ -131,7 +127,7 @@ here.
 The hook is completely installed in the "upstream" repository. In my case I have
 a special "commit"-User. With this User it is easier to filter "commit"-emails
 from jira. Therefore you must insert a username and a password of the
-"commit"-User in the hook (line 296, 297).
+"commit"-User in the hook.
 
 Whenever a commit is made in the upstream repository or a "git push" 
 is done to it, the  installed hook will kick in and validate the 
@@ -145,34 +141,11 @@ commit message, followed by update of the Jira issue.
   and mark it executable
 
       Example:
+       chmod +x git-jira-hook
        cp git-jira-hook upstream-project.git/hooks/pre-receive
        cp git-jira-hook upstream-project.git/hooks/update
        cp git-jira-hook upstream-project.git/hooks/post-receive
-       chmod +x upstream-project.git/hooks/pre-receive
-       chmod +x upstream-project.git/hooks/update
-       chmod +x upstream-project.git/hooks/post-receive
 
-(ii) Set the following git config values (Note: gitweb.url config is 
-      recommended, but Optional): "jira.url" "gitweb.url"
-      Example:
-      cd upstream.git
-      git config jira.url "http://jira.mycompany.com"
-      git config gitweb.url "http://git.mycompany.com/gitweb.cgi/p=upstream-project.git;a=commit;h="
-
-(iii)  [Optional] If you wish jira integration to be triggered only
-      on certain branches, add a comma-separated list of 
-      branch names to git config "git-jira-hook.branches"
-      For example:
-   
-        cd joyjit-repo
-        git config git-jira-hook.branches "jira1,jira2"
-
-      This will cause the integration to be triggered only on
-      git branches jira1 and jira2. For instance, if you make a commit
-      to branch "master", the hook will simply stay disabled.
-
-      By default, if you do not set this config, all branches are 
-      checked.
 See the "Frequently Asked Questions" section to figure out what values 
 to use for your "jira.url" and "gitweb.url"
 
@@ -186,46 +159,24 @@ also marks FOO-56 as resolved.
 
 Anywhere in your commit message, you must put the following strings 
 (without the quotes):
-   "#FOO-23"
-   "#BAR-42"
+   "FOO-23"
+   "BAR-42"
 
 
 And then, at a later time, when you do "git push" to push your changes
 upstream, the final validation and Jira issue update will be done.
 
 
-5. Known Limitations
-====================
-
-6. Frequently asked Questions
-=============================
-
-Q 6.1  What value should I use for "jira.url" git config?
-    A. It depends on your Jira server setup. When you log-in to the Jira 
-       server using a browser, the URL to the login page typically looks like:
-           http://jira.mycompany.com/secure/Dashboard.jspa 
-       In which case, your "jira.url" should be "http://jira.mycompany.com"
- 
-
-Q 6.2  What value should I use for "gitweb.url" git config?
-    A. Assuming you have gitweb enabled for your repository, this is the URL which you
-       use to access gitweb.
-       for instance, in order to view commit "424daa955f5c8a17aab9d524071f65f1999769a9"
-       in gitweb, if you use:
-http://git.mycompany.com/gitweb.cgi?p=joyjit-repo/.git;a=commit;h=424daa955f5c8a17aab9d524071f65f1999769a9
-
-       Then the "gitweb.url" to use is:
-       "http://git.mycompany.com/gitweb.cgi?p=joyjit-repo/.git;a=commit;h="
-
-
-7. Credits
+5. Credits
 ==========
 This script was inspired by the following:
 
-http://github.com/dreiss/git-jira-attacher/tree/master
+- http://github.com/dreiss/git-jira-attacher/tree/master
+- https://github.com/chiemseesurfer/git-trac-hook
+- http://jira-python.readthedocs.org/en/latest/
 
 
-8. References
+6. References
 =============
 [1] Git, an source configuratiin management ("SCM") tool
     http://git-scm.com/
@@ -237,9 +188,7 @@ http://github.com/dreiss/git-jira-attacher/tree/master
     http://git.or.cz/gitwiki/Gitweb
     
 
-8. Notes 
+7. Notes 
 =============
-- JIRA is not developing the SOAP API any more. See: https://developer.atlassian.com/display/JIRADEV/Creating+a+JIRA+SOAP+Client
-  SOAP will be deprecated if the REST-API is full developed
-- JIRA SOAP at bitbucket: https://bitbucket.org/bob_swift/jira-soap
+- JIRA REST at bitbucket: https://bitbucket.org/bspeakmon/jira-python
 
