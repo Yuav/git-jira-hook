@@ -30,7 +30,8 @@ Table of Contents
 ===============
 The JIRA SOAP API ist not developed any more. It will be deprecated beginning
 with JIRA 5.x. Therefore I switched my git-hook from SOAP to REST. If someone
-wants to see the SOAP-hook, just checkout the soap git tag (git checkout soap).
+wants to see the SOAP-hook, just checkout the soap git tag (git checkout soap)
+or see the git-jira-hook-SOAP.
 
 1.1 Get git and Jira to work in Harmony
 ---------------------------------------
@@ -98,16 +99,13 @@ commit simply by clicking on the hyperlink.
 ======================
 - Python 2.x and python modules: SOAPpy, ConfigParser.
   I have tested with Python 2.5.2.
-- A Jira installation with Remote APIs enabled.
 - git version 1.6.x.y (I have tested with 1.6.0.4).
 - Linux or some other similar Unix flavor (I have tested with 
-  SuSE 11.3).
+  Ubuntu 12.03 LTS).
 - Python 2.x and python modules: jira-python (available at Bitbucket:
   https://bitbucket.org/bspeakmon/jira-python)
   I have tested with Python 2.7.4.
 - A Jira installation with Remote APIs enabled.
-- Linux or some other similar Unix flavor (I have tested with 
-  Ubuntu 12.03 LTS).
 - OPTIONAL, but Highly recommended: gitweb [4] which has been 
   setup with "upstream" git repositories.
 
