@@ -1,0 +1,7 @@
+language: python
+python:
+  - "3.3"
+  - "2.7"
+  - "2.6"
+
+script: python -c "__import__('compiler').parse(open('git-jira-hook').read())"
