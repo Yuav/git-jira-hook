@@ -33,9 +33,9 @@ Table of Contents
 1. Introduction
 ===============
 The JIRA SOAP API ist not developed any more. It will be deprecated beginning
-with JIRA 5.x. Therefore I switched my git-hook from SOAP to REST. If someone
-wants to see the SOAP-hook, just checkout the soap git tag (git checkout soap)
-or see the git-jira-hook-SOAP.
+with JIRA 5.x. Therefore I switched my git-hook from SOAP to REST. This
+repository includes the first version of the git hook for jira REST API. The
+main hook was moved to a new repo (git-jira-hook-REST) on github.
 
 1.1 Get git and Jira to work in Harmony
 ---------------------------------------
