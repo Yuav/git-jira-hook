@@ -17,7 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Status
 =================
-[![Build Status](https://travis-ci.org/chiemseesurfer/git-jira-hook.png)](https://travis-ci.org/chiemseesurfer/git-jira-hook)
+[![Build Status](https://travis-ci.org/ThESCOM/git-jira-hook.svg?branch=master)](https://travis-ci.org/ThESCOM/git-jira-hook)
 
 Table of Contents
 =================
